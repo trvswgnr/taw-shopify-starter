@@ -3,4 +3,4 @@ development:
   theme_id: "121299828914"
   store: tawdigitaltest.myshopify.com
   ignore_files:
-  - config/settings_data.json
+  - .git/
