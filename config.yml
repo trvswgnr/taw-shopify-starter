@@ -1,0 +1,6 @@
+development:
+  password: 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
+  theme_id: "121299828914"
+  store: tawdigitaltest.myshopify.com
+  ignore_files:
+  - config/settings_data.json
