@@ -4,6 +4,7 @@
 	"description": "Assets for dfm theme",
 	"main": "webpack.config.js",
 	"dependencies": {
+		"bootstrap": "^5.0.0-beta3",
 		"regenerator-runtime": "^0.13.7"
 	},
 	"devDependencies": {

@@ -1,0 +1,10 @@
+.site-header__inner {
+	position: relative;
+	z-index: 300;
+}
+
+ul.site-nav {
+	li + li {
+		margin-left: 1rem;
+	}	
+}

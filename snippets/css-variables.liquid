@@ -22,6 +22,7 @@
     --color-text-field-text-rgb: {{ settings.color_text_field_text | color_to_rgb | remove: 'rgb(' | remove: 'rgba(' | remove: ')' | remove: ', 0.0' }};
 
     --color-btn-primary: {{ settings.color_button }};
+	--color-btn-primary-lighter: {{ settings.color_button | color_lighten: 15 }};
     --color-btn-primary-darker: {{ settings.color_button | color_darken: 10 }};
     --color-btn-primary-text: {{ settings.color_button_text }};
 
@@ -69,13 +70,13 @@
     --font-weight-body--bold: {{ base_font_bold.weight | default: 700 }};
     --font-weight-body--bolder: {{ base_font_bolder.weight | default: 700 }};
 
-    --font-stack-header: {{ header_font.family }}, {{ header_font.fallback_families }};
+    --font-stack-header: 'Mulish', {{ base_font.family }}, {{ header_font.fallback_families }};
     --font-style-header: {{ header_font.style }};
-    --font-weight-header: {{ header_font.weight }};
+    --font-weight-header: 700;
 
-    --font-stack-body: {{ base_font.family }}, {{ base_font.fallback_families }};
+    --font-stack-body: 'Mulish', {{ base_font.fallback_families }};
     --font-style-body: {{ base_font.style }};
-    --font-weight-body: {{ base_font.weight }};
+    --font-weight-body: 500;
 
     --font-size-header: {{ settings.type_header_base_size }};
 
