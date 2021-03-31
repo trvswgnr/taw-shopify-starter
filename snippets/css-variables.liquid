@@ -22,7 +22,7 @@
     --color-text-field-text-rgb: {{ settings.color_text_field_text | color_to_rgb | remove: 'rgb(' | remove: 'rgba(' | remove: ')' | remove: ', 0.0' }};
 
     --color-btn-primary: {{ settings.color_button }};
-	--color-btn-primary-lighter: {{ settings.color_button | color_lighten: 15 }};
+	--color-btn-primary-lighter: {{ settings.color_button | color_modify: 'alpha', 0.35 }};
     --color-btn-primary-darker: {{ settings.color_button | color_darken: 10 }};
     --color-btn-primary-text: {{ settings.color_button_text }};
 
