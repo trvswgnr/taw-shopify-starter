@@ -8,7 +8,7 @@ const config = {
 
 	// Create the entry points.
 	// One for frontend and one for the admin area.
-	entry: ['./src/js/index.js', './src/sass/main.scss'],
+	entry: ['./src/js/index.js', './src/sass/theme.scss'],
 
 	// Setup a loader to transpile down the latest and great JavaScript so older browsers
 	// can understand it.
@@ -76,15 +76,14 @@ const config = {
 
 module.exports = (env, argv) => {
 	const isProd = (argv.mode === 'production');
-	const jsFile = 'js/index.js';
-	const cssFile = 'css/main.css';
+	const jsFile = 'index.js';
+	const cssFile = 'theme.css';
 
 	config.plugins = [
 		new MiniCssExtractPlugin({
 			filename: cssFile,
-			chunkFilename: "css/[id].css"
-		}),
-		new VueLoader.VueLoaderPlugin()
+			chunkFilename: "[id].css"
+		})
 	];
 
 	// Create the output files.
