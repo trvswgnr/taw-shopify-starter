@@ -1367,6 +1367,20 @@ textarea {
 }
 
 /*================ Typography ================*/
+
+.h2,
+h2 {
+	font-size: 32px;
+}
+@media only screen and (max-width: 749px) {
+	.h2,
+	h2 {
+		font-size: calc(
+			((var(--font-h2-mobile)) / (var(--font-size-base))) * 1em
+		);
+	}
+}
+
 blockquote {
 	font-size: calc(((18) / (var(--font-size-base))) * 1em);
 	font-style: normal;
@@ -1595,6 +1609,7 @@ h6,
 
 .mega-title {
 	margin-bottom: 8px;
+	font-size: 45px;
 }
 
 .mega-title--large {
@@ -1614,7 +1629,7 @@ h6,
 @media only screen and (min-width: 750px) {
 	.mega-subtitle {
 		font-size: calc(
-			((var(--font-size-base) + 4) / (var(--font-size-base))) * 1em
+			((var(--font-size-base) + 2) / (var(--font-size-base))) * 1em
 		);
 		margin: 0 auto;
 	}
@@ -3144,8 +3159,8 @@ hr {
 }
 @media only screen and (min-width: 750px) {
 	.index-section {
-		padding-top: 55px;
-		padding-bottom: 55px;
+		padding-top: $section-padding-y;
+		padding-bottom: $section-padding-y;
 	}
 }
 .index-section:first-child {
@@ -7584,7 +7599,7 @@ hr {
 		height: 475px;
 	}
 	.hero--large {
-		height: 650px;
+		height: 570px;
 	}
 	.hero--x-large {
 		height: 775px;
