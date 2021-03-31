@@ -84,7 +84,7 @@
           "zh-CN": "标题和链接",
           "zh-TW": "標題和連結"
         },
-        "default": "#3a3a3a"
+        "default": "#373F41"
       },
       {
         "type": "color",
@@ -140,7 +140,7 @@
           "zh-CN": "销售价格",
           "zh-TW": "售價"
         },
-        "default": "#EA0606"
+        "default": "#3C64B1"
       },
       {
         "type": "header",
@@ -442,7 +442,7 @@
           "zh-CN": "背景",
           "zh-TW": "背景"
         },
-        "default": "#685858"
+        "default": "#000000"
       },
       {
         "type": "range",
@@ -773,7 +773,7 @@
           "zh-CN": "基本尺寸",
           "zh-TW": "基本尺寸"
         },
-        "default": 15,
+        "default": 16,
         "min": 14,
         "max": 20,
         "step": 1,
