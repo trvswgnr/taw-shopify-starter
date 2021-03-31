@@ -58,7 +58,7 @@
 		<div class="site-header__inner bg-white">
 		<div class="container-fluid container-md">
 		<div class="row align-items-center justify-content-between">
-			<div class="col-4">
+			<div class="col-md-4">
 				<nav class="small--hide" id="AccessibleNav" role="navigation">
 					{% include 'site-nav', linklist: section.settings.main_linklist, wrapper_class: 'text-left' %}
 				</nav>
@@ -100,7 +100,7 @@
 			</div>
 			<div class="col-4 text-right">
 				<div class="site-header__icons-wrapper">
-					<button type="button" class="btn--link site-header__icon site-header__search-toggle js-drawer-open-top" data-predictive-search-open-drawer>
+					<button type="button" class="d-none btn--link site-header__icon site-header__search-toggle js-drawer-open-top" data-predictive-search-open-drawer>
 						{% include 'icon-search' %}
 						<span class="icon__fallback-text">{{ 'layout.navigation.search' | t }}</span>
 					</button>
@@ -135,7 +135,7 @@
 						</button>
 					{% endunless %}
 
-					<button type="button" class="btn ms-4 d-none d-md-block">Shop</button>
+					<a href="/collections/all" class="btn ms-4 d-none d-md-block">Shop</a>
 				</div><!-- .site-header__icons-wrapper -->
 			</div><!-- .col-4 -->
 		</div><!-- .row -->
