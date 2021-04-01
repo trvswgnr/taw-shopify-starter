@@ -1,0 +1,137 @@
+<div class="page-width">
+	{% if section.settings.title != blank or section.settings.description != blank %}
+	<div class="section-header text-center">
+		{% if section.settings.title != blank %}
+			<h2 class="mb-2">{{ section.settings.title | escape }}</h2>
+		{% endif %}
+
+		{% if section.settings.description != blank %}
+			<p class="section-description">{{ section.settings.description | escape }}</p>
+		{% endif %}
+	</div>
+	{% endif %}
+
+	{%- assign collection = collections[section.settings.collection] -%}
+
+	<div class="swiper-container swiper-container--{{section.id}}">
+		<div class="swiper-wrapper">
+			{% for product in collection.products limit: product_limit %}
+			<div class="swiper-slide">
+				{% include 'product-card-block', max_height: 200, product: product, show_vendor: section.settings.show_vendor %}
+			</div>
+			{% endfor %}
+		</div>
+
+		<!-- swiper arrows -->
+		<div class="swiper-button-next"></div>
+		<div class="swiper-button-prev"></div>
+	</div>
+</div>
+
+<!-- Initialize Swiper -->
+<script>
+	var swiper = new Swiper(".swiper-container--{{section.id}}", {
+		slidesPerView: 1,
+		spaceBetween: 12,
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		},
+		loop: true,
+		breakpoints: {
+			750: {
+				slidesPerView: {{ section.settings.grid }},
+				spaceBetween: 30,
+			}
+		}
+	});
+</script>
+
+<style>
+.swiper-button-next:after, .swiper-button-prev:after {
+	font-weight: 900;
+}
+</style>
+
+{% schema %}
+{
+  "name": {
+    "en": "Collection slider"
+  },
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "en": "Heading"
+      },
+      "default": {
+        "en": "Collection Slider"
+      }
+    },
+	{
+      "type": "text",
+      "id": "description",
+      "label": {
+        "en": "Description"
+      }
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": {
+        "en": "Collection"
+      }
+    },
+    {
+      "type": "range",
+      "id": "grid",
+      "label": {
+        "en": "Slides per view"
+      },
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": {
+        "en": "Number of products"
+      },
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": {
+        "en": "Show product vendors"
+      },
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": {
+        "en": "Show 'View all' button"
+      },
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "Collection Slider"
+      },
+      "category": {
+        "en": "Collection"
+      }
+    }
+  ]
+}
+{% endschema %}

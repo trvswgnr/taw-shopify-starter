@@ -1371,6 +1371,7 @@ textarea {
 .h2,
 h2 {
 	font-size: 32px;
+	font-weight: 900;
 }
 @media only screen and (max-width: 749px) {
 	.h2,
@@ -1609,7 +1610,7 @@ h6,
 
 .mega-title {
 	margin-bottom: 8px;
-	font-size: 45px;
+	font-size: 48px;
 }
 
 .mega-title--large {
@@ -5076,9 +5077,9 @@ hr {
 
 .announcement-bar__message {
 	display: block;
-	padding: 11px 22px;
-	font-size: calc(((16) / (var(--font-size-base))) * 1em);
-	font-weight: var(--font-weight-header);
+	padding: 3px 22px;
+	font-size: 18px;
+	font-weight: 400;
 }
 @media only screen and (min-width: 750px) {
 	.announcement-bar__message {

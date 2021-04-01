@@ -1,3 +1,5 @@
+$gray-600: #737B7D;
+$gray: $gray-600;
 $font-family-sans-serif: "Mulish", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 $border-radius: 0;
 $grid-breakpoints: (
@@ -18,4 +20,21 @@ $container-max-widths: (
   xxl: $container-max-xxl
 );
 
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer / 4,
+  2: $spacer / 2,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 5
+);
+
 $section-padding-y: 24px;
+
+// css variables
+:root {
+	--swiper-theme-color: #000000;
+	--swiper-navigation-size: 25px;
+}

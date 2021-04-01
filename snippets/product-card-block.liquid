@@ -1,0 +1,49 @@
+{% comment %}
+    Renders a product card using "Grid" style
+    Accepts:
+    - max_height: {Number} Maximum height of the product's image (required)
+    - product: {Object} Product Liquid object (required)
+    - show_vendor: {Boolean} Show the product's vendor depending on the section setting (optional)
+
+    Usage:
+    {% include 'product-card-grid', max_height: max_height, product: product, show_vendor: section.settings.show_vendor %}
+{% endcomment %}
+
+{% capture img_id %}ProductCardImage-{{ section.id }}-{{ product.id }}{% endcapture %}
+{%- assign preview_image = product.featured_media.preview_image -%}
+{% capture wrapper_id %}ProductCardImageWrapper-{{ section.id }}-{{ product.id }}{% endcapture %}
+{%- assign img_url = preview_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+<div class="product-card product-card--block">
+	<a class="full-width-link" href="{{ product.url }}">
+		<span class="visually-hidden">{{ product.title }}</span>
+	</a>
+	<div class="image-wrapper" data-image-loading-animation>
+		<div id="{{ wrapper_id }}" class="js">
+			<img id="{{ img_id }}"
+					class="product-card__image lazyload"
+					alt="{{ preview_image.alt }}"
+					data-src="{{ img_url }}"
+					data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+					data-aspectratio="{{ preview_image.aspect_ratio }}"
+					data-sizes="auto"
+					data-image>
+		</div>
+	</div>
+	<div class="h4 product-card__title" aria-hidden="true">{{ product.title }}</div>
+	{% include 'product-price-listing', product: product, show_vendor: show_vendor %}
+</div>
+
+<style>
+.product-card {
+	width: 100%;
+	max-width: 200px;
+}
+.product-card__image {
+	width: 100%;
+	object-fit: contain;
+}
+.product-card .price {
+	align-items: center;
+}
+</style>

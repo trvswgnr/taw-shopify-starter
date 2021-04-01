@@ -1,0 +1,96 @@
+{% comment %}
+    Creates a custom sized responsive spacer
+{% endcomment %}
+{% if section.settings.same == true %}
+	{%- assign class = '' -%}
+{% else %}
+	{%- assign class = 'd-none d-md-block' -%}
+{% endif %}
+
+<div class="{{ class }}" style="height: {{ section.settings.size_desktop }}px;"></div>
+
+{% if section.settings.same == false %}
+	<div class="d-md-none" style="height: {{ section.settings.size_mobile }}px;"></div>
+{% endif %}
+
+{% if request.design_mode %}
+<span class="{{ class }} indicator-desktop">{{ section.settings.size_desktop }}px</span>
+{% if section.settings.same == false %}
+	<span class="d-md-none indicator-mobile">{{ section.settings.size_mobile }}px</span>
+{% endif %}
+<style>
+.spacer {
+	position: relative;
+	background-color: rgba(60, 101, 177, 0.15);
+}
+
+.spacer span {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0;
+	font-weight: 700;
+	color: rgba(60, 101, 177, 0.35);
+}
+
+.spacer .indicator-desktop {
+	font-size: {{ section.settings.size_desktop | at_least: 10 | at_most: 40 }}px;
+}
+
+.spacer .indicator-mobile {
+	font-size: {{ section.settings.size_mobile | at_least: 10 | at_most: 40 }}px;
+}
+</style>
+{% endif %}
+
+{% schema %}
+{
+	"name": {
+		"en": "Spacer"
+	},
+	"class": "spacer",
+	"settings": [
+		{
+		"type": "checkbox",
+		"id": "same",
+		"label": {
+			"en": "Same for both desktop and mobile"
+		},
+		"default": false
+		},
+		{
+			"type": "range",
+			"id": "size_desktop",
+			"label": {
+				"en": "Size - Desktop"
+			},
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"default": 24
+		},
+		{
+			"type": "range",
+			"id": "size_mobile",
+			"label": {
+				"en": "Size - Mobile"
+			},
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"default": 24
+		}
+	],
+	"presets": [
+		{
+			"name": {
+				"en": "Spacer"
+			},
+			"category": {
+				"en": "Advanced layout"
+			}
+		}
+	]
+}
+{% endschema %}
