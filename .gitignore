@@ -2,3 +2,4 @@ node_modules
 assets/index.js
 assets/theme.css
 .DS_STORE
+config.yml
