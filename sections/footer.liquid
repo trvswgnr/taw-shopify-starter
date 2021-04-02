@@ -101,6 +101,10 @@
     color: #F2F2F2;
   }
 
+  .site-footer__linklist-item a {
+	  opacity: 0.8;
+  }
+
   .site-footer {
     color: var(--color-footer-color);
     background-color: var(--color-footer-bg);
@@ -142,7 +146,7 @@
   <div class="page-width">
     <div class="site-footer__content">
 		{% if section.settings.logo %}
-		<div class="site-footer__item">
+		<div class="site-footer__item site-footer__item--logo">
 			{%- assign img_url = section.settings.logo | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 			<a href="{{ routes.root_url }}" class="site-footer__logo-image me-md-4 pe-md-3" data-image-loading-animation>
 				{% capture logo_alt %}{{ section.settings.logo.alt | default: shop.name }}{% endcapture %}

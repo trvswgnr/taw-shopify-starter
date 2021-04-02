@@ -115,3 +115,11 @@ ul.site-nav {
 		color: #A9A9A9;
 	}
 }
+
+
+.site-footer__item--logo {
+	
+	@media (max-width: $md) {
+		justify-content: center;
+	}
+}
