@@ -2,15 +2,23 @@ $gray-600: #737B7D;
 $gray: $gray-600;
 $font-family-sans-serif: "Mulish", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 $border-radius: 0;
+
+$sm: 756px;
+$md: 750px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
 $grid-breakpoints: (
   xs: 0,
-  sm: 576px,
-  md: 750px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
+  sm: $sm,
+  md: $sm,
+  lg: $lg,
+  xl: $xl,
+  xxl: $xxl
 );
 
+$container-padding-x: 1rem;
 $container-max-xxl: 1200px;
 $container-max-widths: (
   sm: 540px,

@@ -1376,9 +1376,7 @@ h2 {
 @media only screen and (max-width: 749px) {
 	.h2,
 	h2 {
-		font-size: calc(
-			((var(--font-h2-mobile)) / (var(--font-size-base))) * 1em
-		);
+		font-size: 24px;
 	}
 }
 
@@ -1405,7 +1403,7 @@ blockquote cite {
 	font-weight: var(--font-weight-body);
 }
 blockquote cite::before {
-	content: "\2014 \0020";
+	// content: "\2014 \0020";
 }
 
 code,
@@ -1449,7 +1447,7 @@ h5,
 .h5,
 h6,
 .h6 {
-	margin: 0 0 17.5px;
+	margin: 0 0 16px;
 	font-family: var(--font-stack-header);
 	font-style: var(--font-style-header);
 	font-weight: var(--font-weight-header);
@@ -7249,7 +7247,7 @@ hr {
 }
 @media only screen and (max-width: 749px) {
 	.site-footer__content {
-		padding: 0 18px;
+		padding: 0;
 	}
 }
 @media only screen and (min-width: 750px) {
@@ -7707,7 +7705,11 @@ hr {
 	);
 	font-weight: var(--font-weight-body);
 	font-style: var(--font-style-body);
-	padding: 0 15px;
+	padding: 0;
+
+	@media (min-width: $md) {
+		padding: 0 15px;
+	}
 }
 .quotes-slider__text cite {
 	font-size: calc(
@@ -7716,7 +7718,22 @@ hr {
 	font-style: normal;
 }
 .quotes-slider__text p {
-	margin-bottom: 30px;
+	margin-bottom: 24px;
+	font-weight: 600;
+	font-size: 16px;
+
+	&::before,
+	&::after {
+		font-weight: 700;
+	}
+
+	&::before {
+		content: "“ ";
+	}
+
+	&::after {
+		content: " “";
+	}
 }
 .quotes-slider__text p + cite {
 	margin-top: 0;

@@ -1,7 +1,7 @@
 <div class="page-width" data-section-id="{{ section.id }}" data-section-type="quotes">
   {% if section.settings.title != blank %}
     <div class="section-header text-center">
-      <h2>{{ section.settings.title | escape }}</h2>
+      <h2 class="mb-2">{{ section.settings.title | escape }}</h2>
     </div>
   {% endif %}
 
@@ -17,14 +17,18 @@
               data-slider-slide-index="{{ forloop.index0 }}"
               data-slider-item>
 
-              <blockquote class="quotes-slider__text text-center">
-                <span class="quote-icon">{% include 'icon-quote' %}</span>
-                {% if block.settings.quote != blank %}
-                  <div class="rte-setting rte">{{ block.settings.quote }}</div>
-                {% endif %}
-                {% if block.settings.author != blank %}
-                  <cite>{{ block.settings.author | escape }}</cite>
-                {% endif %}
+              <blockquote class="quotes-slider__text blockquote text-center">
+			  	<div class="blockquote__inner">
+					{% if block.settings.quote != blank %}
+					<div class="rte-setting rte">{{ block.settings.quote }}</div>
+					{% endif %}
+					{% if block.settings.author != blank %}
+					<cite>{{ block.settings.author | escape }}</cite>
+					<div class="author-image-wrapper">
+						<img src="https://i.pravatar.cc/100">
+					</div>
+					{% endif %}
+				</div>
               </blockquote>
             </div>
           {% endfor %}

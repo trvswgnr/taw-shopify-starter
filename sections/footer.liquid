@@ -54,28 +54,28 @@
 
 {%- case section.blocks.size -%}
   {%- when 1 -%}
-    {%- assign footer_item = 'site-footer__item--full-width' -%}
+    {%- assign footer_item = '' -%}
     {%- assign inline_list = true -%}
   {%- when 2 -%}
-    {%- assign footer_item = 'site-footer__item--one-half' -%}
+    {%- assign footer_item = '' -%}
     {%- assign inline_list = true -%}
   {%- when 3 -%}
-    {%- assign footer_item = 'site-footer__item--one-third' -%}
+    {%- assign footer_item = '' -%}
     {%- for block in section.blocks -%}
       {%- if block.type == 'newsletter' -%}
-        {%- assign footer_item = 'site-footer__item--one-quarter' -%}
+        {%- assign footer_item = '' -%}
         {%- break -%}
       {%- endif -%}
     {%- endfor -%}
   {%- when 4 -%}
-    {%- assign footer_item = 'site-footer__item--one-quarter' -%}
+    {%- assign footer_item = '' -%}
   {%- when 5 -%}
-    {%- assign footer_item = 'site-footer__item--one-fifth' -%}
+    {%- assign footer_item = '' -%}
 {%- endcase -%}
 
 {% comment %} Create an appropriate hover color based on text color and brightness {% endcomment %}
-{%- assign footer_text_color = section.settings.color_footer_text -%}
-{%- assign footer_text_color_brightness = section.settings.color_footer_text | color_brightness -%}
+{%- assign footer_text_color = '#F2F2F2' -%}
+{%- assign footer_text_color_brightness = footer_text_color | color_brightness -%}
 {%- if footer_text_color_brightness <= 26 -%}
   {%- assign footer_text_color_hover = footer_text_color | color_lighten: 25 -%}
 {%- elsif footer_text_color_brightness <= 65 -%}
@@ -86,7 +86,8 @@
 
 <style>
   .site-footer__hr {
-    border-bottom: 1px solid {{ section.settings.color_footer_bg | color_darken: 10 }};
+    border-bottom: 1px solid #979797;
+	opacity: 0.3;
   }
 
   .site-footer p,
@@ -97,16 +98,16 @@
   .site-footer__copyright-content a,
   .site-footer__newsletter-error,
   .site-footer__social-icons .social-icons__link {
-    color: {{ section.settings.color_footer_text }};
+    color: #F2F2F2;
   }
 
   .site-footer {
-    color: {{ section.settings.color_footer_text }};
-    background-color: {{ section.settings.color_footer_bg }};
+    color: var(--color-footer-color);
+    background-color: var(--color-footer-bg);
   }
 
   .site-footer__rte a {
-    border-bottom: 1px solid {{ section.settings.color_footer_text }};
+    border-bottom: 1px solid var(--color-footer-color);
   }
 
   .site-footer__rte a:hover,
@@ -124,7 +125,7 @@
 
 {%- capture payment_icon_markup -%}
   {%- if show_payment_icons -%}
-    <div class="grid__item site-footer__payment-icons">
+    <div class="site-footer__payment-icons">
       <span class="visually-hidden">{{ 'general.payment.method' | t }}</span>
       <ul class="payment-icons list--inline site-footer__icon-list">
         {%- for type in shop.enabled_payment_types -%}
@@ -140,6 +141,29 @@
 <footer class="site-footer critical-hidden" role="contentinfo" data-section-id="{{ section.id }}" data-section-type="footer-section">
   <div class="page-width">
     <div class="site-footer__content">
+		{% if section.settings.logo %}
+		<div class="site-footer__item">
+			{%- assign img_url = section.settings.logo | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+			<a href="{{ routes.root_url }}" class="site-footer__logo-image me-md-4 pe-md-3" data-image-loading-animation>
+				{% capture logo_alt %}{{ section.settings.logo.alt | default: shop.name }}{% endcapture %}
+				<img class="lazyload js"
+					src="{{ section.settings.logo | img_url: '300x300' }}"
+					data-src="{{ img_url }}"
+					data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+					data-aspectratio="{{ section.settings.logo.aspect_ratio }}"
+					data-sizes="auto"
+					alt="{{ logo_alt | escape }}"
+					style="">
+				<noscript>
+				{% capture image_size %}{{ section.settings.logo_max_width | escape }}x{% endcapture %}
+				<img src="{{ section.settings.logo | img_url: image_size }}"
+						srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+						alt="{{ section.settings.logo.alt | default: shop.name }}"
+						style="">
+				</noscript>
+			</a>
+			</div>
+		{% endif %}
       {%- for block in section.blocks -%}
 
         <div class="site-footer__item
@@ -226,17 +250,53 @@
           </div>
         </div>
       {%- endfor -%}
+
+			{%- assign socials = "Facebook Twitter Pinterest Instagram Tumblr Snapchat YouTube Vimeo" | split: ' ' -%}
+			{%- if social_icons -%}
+			<div class="site-footer__item flex-wrap">
+				<p class="h4 w-100">Social</p>
+				<ul class="site-footer__social-icons social-icons site-footer__icon-list row">
+					{%- for social in socials -%}
+					{%- assign social_link = social | prepend: 'social_' | append: '_link' | downcase -%}
+					{%- assign icon_link = social | prepend: 'icon-' | downcase -%}
+					{%- if settings[social_link] != blank -%}
+						<li class="col-auto social-icons__item">
+							<a class="social-icons__link" href="{{ settings[social_link] | escape }}" aria-describedby="a11y-external-message">
+								{%- include icon_link -%}
+								<span class="icon__fallback-text">{{ social }}</span>
+							</a>
+						</li>
+					{%- endif -%}
+					{%- endfor -%}
+
+					{%- if request.page_type == 'blog' or request.page_type == 'article' -%}
+					<li>
+						<a class="social-icons__link" href="{{ shop.url }}{{ blog.url }}.atom">
+						{% include 'icon-rss' %}
+						<span class="icon__fallback-text">RSS</span>
+						</a>
+					</li>
+					{%- endif -%}
+				</ul>
+			</div>
+			{%- else -%}
+			<div class="small--hide site-footer-item-align-right {% if show_selectors or show_payment_icons %}site-footer-item-center-vertically{% endif %}">
+				<small class="site-footer__copyright-content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
+				<small class="site-footer__copyright-content site-footer__copyright-content-powered-by">{{ powered_by_link }}</small>
+			</div>
+			{%- endif -%}
+
     </div>
   </div>
 
-  <hr class="site-footer__hr">
-
-  {%- assign socials = "Facebook Twitter Pinterest Instagram Tumblr Snapchat YouTube Vimeo" | split: ' ' -%}
+	<div class="page-width">
+		<hr class="site-footer__hr">
+	</div>
 
   <div class="page-width">
-    <div class="grid grid--no-gutters small--text-center grid--footer-float-right">
+    <div class="grid small--text-center">
       {%- if show_selectors -%}
-        <div class="grid__item one-half small--one-whole">
+        <div class="grid__item">
           {%- form 'localization', class: 'selectors-form', data-disclosure-form: '' -%}
             {%- if locale_selector -%}
               <div class="selectors-form__item">
@@ -291,39 +351,6 @@
         <div class="grid__item small--hide {{ payment_width_class }} {% if show_payment_icons %}site-footer-item-center-vertically{% endif %}">{{ payment_icon_markup }}</div>
       {%- endif -%}
 
-      <div class="grid__item {% if show_selectors or show_payment_icons %}one-half{% endif %} small--one-whole site-footer-item-tall">
-        {%- if social_icons -%}
-          <ul class="list--inline site-footer__social-icons social-icons site-footer__icon-list">
-            {%- for social in socials -%}
-              {%- assign social_link = social | prepend: 'social_' | append: '_link' | downcase -%}
-              {%- assign icon_link = social | prepend: 'icon-' | downcase -%}
-              {%- if settings[social_link] != blank -%}
-                <li class="social-icons__item">
-                  <a class="social-icons__link" href="{{ settings[social_link] | escape }}" aria-describedby="a11y-external-message">
-                    {%- include icon_link -%}
-                    <span class="icon__fallback-text">{{ social }}</span>
-                  </a>
-                </li>
-              {%- endif -%}
-            {%- endfor -%}
-
-            {%- if request.page_type == 'blog' or request.page_type == 'article' -%}
-              <li>
-                <a class="social-icons__link" href="{{ shop.url }}{{ blog.url }}.atom">
-                  {% include 'icon-rss' %}
-                  <span class="icon__fallback-text">RSS</span>
-                </a>
-              </li>
-            {%- endif -%}
-          </ul>
-        {%- else -%}
-          <div class="small--hide site-footer-item-align-right {% if show_selectors or show_payment_icons %}site-footer-item-center-vertically{% endif %}">
-            <small class="site-footer__copyright-content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
-            <small class="site-footer__copyright-content site-footer__copyright-content-powered-by">{{ powered_by_link }}</small>
-          </div>
-        {%- endif -%}
-      </div>
-
       {%- if show_selectors -%}
         <div class="grid__item small--hide {{ payment_width_class }}">{{ payment_icon_markup }}</div>
       {%- endif -%}
@@ -337,9 +364,8 @@
         </div>
       {%- endif -%}
 
-      <div class="grid__item small--one-whole {{ copyright_show_class }} site-footer-item-align-right">
-        <small class="site-footer__copyright-content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
-        <small class="site-footer__copyright-content site-footer__copyright-content--powered-by">{{ powered_by_link }}</small>
+      <div class="mb-5 text-center grid__item small--one-whole {{ copyright_show_class }} site-footer-item-align-right">
+        <small class="site-footer__copyright-content">&copy; {{ 'now' | date: "%Y" }} Lift Media | All Rights Reserved</small>
       </div>
     </div>
   </div>
@@ -398,6 +424,33 @@
         "vi": "Phương thức thanh toán",
         "zh-CN": "支付方式",
         "zh-TW": "付款方式"
+      }
+    },
+	{
+      "type": "image_picker",
+      "id": "logo",
+      "label": {
+        "cs": "Obrázek loga",
+        "da": "Logobillede",
+        "de": "Logo-Foto",
+        "en": "Logo image",
+        "es": "Logo",
+        "fi": "Logokuva",
+        "fr": "Image du logo",
+        "it": "Immagine del logo",
+        "ja": "ロゴ画像",
+        "ko": "로고 이미지",
+        "nb": "Logobilde",
+        "nl": "Afbeelding van logo",
+        "pl": "Obraz logo",
+        "pt-BR": "Imagem do logo",
+        "pt-PT": "Imagem do logótipo",
+        "sv": "Logobild",
+        "th": "รูปภาพโลโก้",
+        "tr": "Logo görseli",
+        "vi": "Hình ảnh logo",
+        "zh-CN": "logo 图片",
+        "zh-TW": "標誌圖片"
       }
     },
     {

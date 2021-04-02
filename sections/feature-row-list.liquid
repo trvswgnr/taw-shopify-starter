@@ -1,4 +1,4 @@
-<div class="page-width feature-row pt-{{ section.settings.pt }} pb-{{ section.settings.pb }}">
+<div class="page-width feature-row feature-row--list">
   {% capture image_layout %}
     <div class="feature-row__item">
       {% if section.settings.image != blank %}
@@ -91,28 +91,6 @@
       "label": {
         "en": "Image"
       }
-    },
-	{
-      "type": "range",
-      "id": "pt",
-      "label": {
-        "en": "Padding top"
-      },
-      "min": 0,
-      "max": 6,
-      "step": 1,
-      "default": 0
-    },
-	{
-      "type": "range",
-      "id": "pb",
-      "label": {
-        "en": "Padding bottom"
-      },
-      "min": 0,
-      "max": 6,
-      "step": 1,
-      "default": 0
     },
     {
       "type": "select",

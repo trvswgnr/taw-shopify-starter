@@ -25,6 +25,10 @@
 	--color-btn-primary-lighter: {{ settings.color_button | color_modify: 'alpha', 0.35 }};
     --color-btn-primary-darker: {{ settings.color_button | color_darken: 10 }};
     --color-btn-primary-text: {{ settings.color_button_text }};
+	
+	{%- assign footer_text_color = '#F2F2F2' -%}
+	--color-footer-text: {{ footer_text_color }};
+	--color-footer-bg: #000000;
 
     --color-blankstate: {{ settings.color_body_text | color_modify: 'alpha', 0.35 }};
     --color-blankstate-border: {{ settings.color_body_text | color_modify: 'alpha', 0.2 }};

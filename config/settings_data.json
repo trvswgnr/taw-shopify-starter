@@ -498,8 +498,8 @@
             "newsletter"
           ],
           "settings": {
-            "color_footer_bg": "#f8f8f8",
-            "color_footer_text": "#6d6d6d"
+            "color_footer_bg": "#000000",
+            "color_footer_text": "#F2F2F2"
           }
         }
       },
