@@ -1,7 +1,7 @@
 {
-	"name": "dfm",
+	"name": "taw-shopify-starter",
 	"version": "1.0.0",
-	"description": "Assets for dfm theme",
+	"description": "Assets for theme",
 	"main": "webpack.config.js",
 	"dependencies": {
 		"bootstrap": "^5.0.0-beta3",
@@ -34,7 +34,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "github.com:trvswgnr/dfm.git"
+		"url": "github.com:trvswgnr/taw-shopify-starter.git"
 	},
 	"author": "Travis Aaron Wagner",
 	"license": "ISC"

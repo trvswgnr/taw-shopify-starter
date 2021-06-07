@@ -1,4 +1,4 @@
-# DFM Tools Custom Shopify Theme
+# Custom Shopify Theme
 
 ## Development Setup
 
